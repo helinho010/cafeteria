@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-10-2023 a las 03:56:17
+-- Tiempo de generación: 11-11-2023 a las 14:44:19
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `restaurante`
+-- Base de datos: `cafeteria`
 --
 
 -- --------------------------------------------------------
@@ -41,7 +41,7 @@ CREATE TABLE `config` (
 --
 
 INSERT INTO `config` (`id`, `nombre`, `telefono`, `email`, `direccion`, `mensaje`) VALUES
-(1, 'Restaurante BITBURST', '59168157060', 'bitburstech@gmail.com', 'La Paz - Bolivia', 'Gracias por la compra');
+(1, 'cafeteria Mayte --', '61159472', 'le4238@gmail.com', 'La Paz - Bolivia', 'Gracias por la compra');
 
 -- --------------------------------------------------------
 
@@ -63,7 +63,33 @@ CREATE TABLE `detalle_pedidos` (
 
 INSERT INTO `detalle_pedidos` (`id`, `nombre`, `precio`, `cantidad`, `id_pedido`) VALUES
 (29, 'Café con Leche', 15.00, 2, 17),
-(30, 'Pastel', 10.00, 3, 17);
+(30, 'Pastel', 10.00, 3, 17),
+(31, 'Café Tonic', 10.00, 1, 18),
+(32, 'Pastel', 10.00, 2, 18),
+(33, 'Café con Leche', 15.00, 1, 19),
+(34, 'Café Tonic', 10.00, 1, 19),
+(35, 'Rollo de Queso', 15.00, 1, 19),
+(36, 'Pastel', 10.00, 1, 19),
+(37, 'Café con Leche', 15.00, 2, 20),
+(38, 'Café Tonic', 10.00, 1, 20),
+(39, 'Café con Leche', 15.00, 2, 21),
+(40, 'Café Tonic', 10.00, 1, 21),
+(41, 'Café con Leche', 15.00, 1, 22),
+(42, 'Rollo de Queso', 15.00, 2, 22),
+(43, 'Café con Leche', 15.00, 2, 23),
+(44, 'Rollo de Queso', 15.00, 1, 23),
+(45, 'Café con Leche', 15.00, 2, 24),
+(46, 'Rollo de Queso', 15.00, 1, 24),
+(47, 'Café Tonic', 10.00, 1, 25),
+(48, 'Rollo de Queso', 15.00, 1, 25),
+(49, 'cofe', 10.00, 1, 26),
+(50, 'cofe', 10.00, 1, 27),
+(51, 'rollo de queso', 15.00, 2, 27),
+(52, 'cofe', 10.00, 2, 28),
+(53, 'rollo de queso', 15.00, 1, 28),
+(54, 'cofe', 10.00, 2, 29),
+(55, 'rollo de queso', 15.00, 1, 29),
+(56, 'cofe', 10.00, 2, 30);
 
 -- --------------------------------------------------------
 
@@ -87,7 +113,21 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`id`, `id_sala`, `num_mesa`, `fecha`, `total`, `observacion`, `estado`, `id_usuario`) VALUES
-(17, 10, 7, '2023-10-24 01:47:51', 60.00, '', 'FINALIZADO', 12);
+(17, 10, 7, '2023-10-24 01:47:51', 60.00, '', 'FINALIZADO', 12),
+(18, 10, 4, '2023-10-24 02:25:38', 30.00, '', 'FINALIZADO', 12),
+(19, 10, 1, '2023-10-24 02:39:12', 50.00, '', 'FINALIZADO', 12),
+(20, 10, 2, '2023-10-24 13:04:08', 40.00, '', 'FINALIZADO', 15),
+(21, 10, 1, '2023-10-24 13:13:57', 40.00, '', 'FINALIZADO', 15),
+(22, 10, 4, '2023-10-24 13:42:45', 45.00, '', 'FINALIZADO', 15),
+(23, 10, 2, '2023-10-24 15:47:34', 45.00, '', 'FINALIZADO', 15),
+(24, 10, 2, '2023-10-24 23:56:58', 45.00, '', 'FINALIZADO', 15),
+(25, 10, 4, '2023-10-29 20:10:34', 25.00, '', 'FINALIZADO', 17),
+(26, 10, 1, '2023-10-31 16:21:48', 10.00, '', 'FINALIZADO', 17),
+(27, 10, 2, '2023-11-01 12:59:51', 40.00, '', 'FINALIZADO', 17),
+(28, 10, 2, '2023-11-03 14:23:13', 35.00, '', 'FINALIZADO', 17),
+(29, 10, 3, '2023-11-07 15:06:39', 35.00, '', 'FINALIZADO', 17),
+(30, 10, 2, '2023-11-08 13:28:54', 20.00, '', 'FINALIZADO', 17),
+(31, 10, 2, '2023-11-08 13:28:54', 0.00, '', 'FINALIZADO', 17);
 
 -- --------------------------------------------------------
 
@@ -109,10 +149,8 @@ CREATE TABLE `platos` (
 --
 
 INSERT INTO `platos` (`id`, `nombre`, `precio`, `imagen`, `fecha`, `estado`) VALUES
-(25, 'Café con Leche', 15.00, '', NULL, 1),
-(26, 'Café Tonic', 10.00, '', NULL, 1),
-(27, 'Rollo de Queso', 15.00, '', NULL, 1),
-(28, 'Pastel', 10.00, '', NULL, 1);
+(29, 'cofe', 10.00, '', NULL, 1),
+(30, 'rollo de queso', 15.00, '', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -132,7 +170,8 @@ CREATE TABLE `salas` (
 --
 
 INSERT INTO `salas` (`id`, `nombre`, `mesas`, `estado`) VALUES
-(10, 'SUCURSAL 1 - EL ALTO - VILLA ADELA', 8, 1);
+(10, 'SUCURSAL 1 - EL ALTO - VILLA ADELA', 8, 1),
+(11, '664566', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -168,10 +207,10 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `pass`, `rol`, `estado`) VALUES
-(4, 'bitburst', 'bit@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 1, 0),
-(12, 'Enrique', 'enrique@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 1, 1),
-(13, 'Luis', 'luis@gmail.com', 'd93591bdf7860e1e4ee2fca799911215', 2, 1),
-(14, 'Casas', 'casas@gmail.com', '674f3c2c1a8a6f90461e8a66fb5550ba', 3, 1);
+(17, 'yosi', 'yosi@gmail.com', '250cf8b51c773f3f8dc8b4be867a9a02', 1, 1),
+(24, 'denil', 'denil@gmail.com', '68053af2923e00204c3ca7c6a3150cf7', 3, 1),
+(25, 'casa', 'casa@gmail.com', '202cb962ac59075b964b07152d234b70', 2, 1),
+(26, '343534', 'juan@gmail', 'dd87e41fd6b4fc07a848fa962c881a3d', 2, 1);
 
 --
 -- Índices para tablas volcadas
@@ -235,37 +274,37 @@ ALTER TABLE `config`
 -- AUTO_INCREMENT de la tabla `detalle_pedidos`
 --
 ALTER TABLE `detalle_pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `platos`
 --
 ALTER TABLE `platos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `salas`
 --
 ALTER TABLE `salas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `temp_pedidos`
 --
 ALTER TABLE `temp_pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Restricciones para tablas volcadas
