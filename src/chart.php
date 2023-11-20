@@ -1,6 +1,7 @@
 <?php
 include("../conexion.php");
-if ($_POST['action'] == 'sales') {
+if ($_POST['action'] == 'sales') 
+{
     $desde = date('Y') . '-01-01 00:00:00';
     $hasta = date('Y') . '-12-31 23:59:59';
     $query = mysqli_query($conexion, "SELECT SUM(IF(MONTH(fecha) = 1, total, 0)) AS ene,
@@ -19,5 +20,9 @@ if ($_POST['action'] == 'sales') {
     $arreglo = mysqli_fetch_assoc($query);
     echo json_encode($arreglo);
     die();
+}
+else{
+    
+    echo json_encode(["ene"=>700,"feb"=>328]);
 }
 ?>

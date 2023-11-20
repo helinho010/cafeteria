@@ -66,8 +66,7 @@ if (!empty($_SESSION['active'])) {
 
 <div class="login-box">
   <div class="login-logo">
-    
-    <h1><b>Sistema</b>Coffee Mayte</h1>
+    <h1 id="titulo-loguin"><b>Sistema</b>Coffee Mayte</h1>
   </div>
   <!-- /.login-logo -->
   <div class="card" >

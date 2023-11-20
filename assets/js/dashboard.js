@@ -89,5 +89,4 @@ $(function () {
             console.log(error);
         }
     });
-    
 })

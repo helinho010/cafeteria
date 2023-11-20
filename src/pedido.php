@@ -32,7 +32,7 @@ if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 3) {
 
                                             <div class="bg-gray py-2 px-3 mt-4">
                                                 <h2 class="mb-0">
-                                                    $<?php echo $data['precio']; ?>
+                                                    <?php echo $data['precio']; ?> Bs.
                                                 </h2>
                                             </div>
 
