@@ -119,14 +119,15 @@ if (empty($_SESSION['active'])) {
                                     echo '<li class="nav-item">
                                         <a href="reporte_dia_salas.php" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Ventas X Dia X Sala </p>
+                                            <p>Ventas X Mes X Sala </p>
                                         </a>
                                     </li>';
-                                } if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
+                                } if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 3) {
                                     echo '<li class="nav-item">
-                                        <a href="lista_ventas.php" class="nav-link">
+                                        <!--a href="lista_ventas.php" class="nav-link"-->
+                                        <a href="reporte_dia_usuario.php" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Ventas X Dia X Usuario</p>
+                                            <p>Ventas X Mes X Usuario</p>
                                         </a>
                                     </li>';
                                 } ?>

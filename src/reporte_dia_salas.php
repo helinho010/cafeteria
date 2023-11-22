@@ -77,13 +77,14 @@ while ($data0 = mysqli_fetch_assoc($query7)){
                     <div class="card-body">
                         <div class="d-flex">
                             <p class="d-flex flex-column">
-                                <span class="text-bold text-lg"><?php echo "El Total de la venta del mes es: ".$totalVentas['total']; ?> Bs</span>
-                                <span>Total</span>
+                                El Total de la venta del mes es: 
+                                <span class="text-bold text-lg" id="totalVenta"></span>Bs
+                                <!-- <span>Total</span> -->
                             </p>
                         </div>
                         <!-- /.d-flex -->
 
-                        <div class="position-relative mb-4">
+                        <div class="position-relative mb-4" id="padre-canvas">
                             <canvas id="sales-chart" height="200"></canvas>
                         </div>
                     </div>
@@ -98,8 +99,9 @@ while ($data0 = mysqli_fetch_assoc($query7)){
     var nombresSalas = [];
     var sumaTotalMesVenta = [];
     var fechaActual = new Date;
-    var mes = fechaActual.getMonth()+1;
+    var mes = (fechaActual.getMonth())+1;
     var anio = fechaActual.getFullYear();
+    var totalVentaDeTodasSalas = 0;
     
     function grafico() {
     'use strict'
@@ -114,7 +116,6 @@ while ($data0 = mysqli_fetch_assoc($query7)){
         success: function (response) {
             if (response != 0) {
                 var data = JSON.parse(response);
-                console.log(data);
                 try {
                     var ticksStyle = {
                         fontColor: '#495057',
@@ -183,7 +184,8 @@ while ($data0 = mysqli_fetch_assoc($query7)){
                                 }]
                             }
                         }
-                    })
+                    });
+
                 } catch (error) {
                     console.log(error);
                 }
@@ -194,7 +196,14 @@ while ($data0 = mysqli_fetch_assoc($query7)){
         }
     });
 }
-    $(document).ready(function(){
+
+    function removeCanvan(){
+        $("#sales-chart").remove();
+        $("#padre-canvas").html('<canvas id="sales-chart" height="200"></canvas>');
+    }
+
+    function llamadaAjaxReporteDiaSalas()
+    {
         $.ajax({
         type: "POST",
         url: "reporte_dia_salas_api.php",
@@ -204,32 +213,27 @@ while ($data0 = mysqli_fetch_assoc($query7)){
             let p = JSON.parse(response);
             nombresSalas =  p.salasNombre;
             sumaTotalMesVenta = p.salasVentaTotal;
+            totalVentaDeTodasSalas = p.total.total;
+            $("#totalVenta").html(totalVentaDeTodasSalas);
             grafico();
         }
-        });  
-        grafico();
+        }); 
+    }
+
+    $(document).ready(function(){
+        llamadaAjaxReporteDiaSalas();
     });
 
     $("#selectMes").on('change',function(){
-       mes = this.value ;  
+       mes = 1 + parseInt(this.value,10)  ; 
+       removeCanvan();
+       llamadaAjaxReporteDiaSalas();  
     });
 
     $("#selectAnio").on('change',function(){
        anio = this.value ;
-       $.ajax({
-        type: "POST",
-        url: "reporte_dia_salas_api.php",
-        data: {"mes":mes, "anio":anio},
-
-        success: function (response) {
-            let p = JSON.parse(response);
-            nombresSalas =  p.salasNombre;
-            sumaTotalMesVenta = p.salasVentaTotal;
-            grafico();
-        }
-        });  
+       removeCanvan();
+       llamadaAjaxReporteDiaSalas();  
     });
-
-    
 
 </script>
