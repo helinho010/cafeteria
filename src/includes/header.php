@@ -135,6 +135,27 @@ if (empty($_SESSION['active'])) {
 
                         </li>
 
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <i class="fas fa-toilet-paper"></i>
+                                <p>
+                                    Facturacion
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 3) {
+                                    echo '<li class="nav-item">
+                                        <a href="factura.php" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Facturar</p>
+                                        </a>
+                                    </li>';
+                                } ?>
+                            </ul>
+
+                        </li>
+
                         <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
                             echo '<li class="nav-item">
                                 <a href="platos.php" class="nav-link">

@@ -211,9 +211,12 @@ while ($data0 = mysqli_fetch_assoc($query7)){
 
         success: function (response) {
             let p = JSON.parse(response);
-            nombresUsuarios =  p.salasNombre;
-            sumaTotalMesVenta = p.salasVentaTotal;
+            nombresUsuarios =  p.usuariosNombre;
+            sumaTotalMesVenta = p.usuariosVentaTotal;
             totalVentaDeTodasSalas = p.total.total;
+            console.log(nombresUsuarios);
+            console.log(sumaTotalMesVenta);
+            console.log(totalVentaDeTodasSalas);
             $("#totalVenta").html(totalVentaDeTodasSalas);
             grafico();
         }
