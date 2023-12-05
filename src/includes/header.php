@@ -20,6 +20,8 @@ if (empty($_SESSION['active'])) {
     <!-- Theme style -->
     <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="../assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
+    <script src="https://unpkg.com/jspdf-invoice-template@1.4.0/dist/index.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
