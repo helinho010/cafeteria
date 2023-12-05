@@ -1,58 +1,7 @@
 <?php
-session_start();
-include "../conexion.php";
 
-require_once '../vendor/autoload.php';
-// require 'vendor/autoload.php';
-use Luecano\NumeroALetras\NumeroALetras;
-use Dompdf\Dompdf;
-
-if (!empty($_GET["id_pedido"])) 
-{
-    $query = mysqli_query($conexion,'
-        select
-            pedidos.total as total_pedidos,
-            pedidos.id as id_pedidos,
-            pedidos.num_mesa,
-            pedidos.fecha,
-            pedidos.observacion,
-            pedidos.estado as estado_pedidos,
-            usuarios.nombre as nombre_usuarios,
-            salas.nombre as nombre_salas,
-            salas.estado as estado_salas,
-            tmp.nombre_detalle_pedidos,
-            tmp.precio,
-            tmp.cantidad
-        from
-            pedidos
-        join usuarios on
-            usuarios.id = pedidos.id_usuario
-        join salas on
-            salas.id = pedidos.id_sala
-        join (
-            select
-                pedidos.id as id_pedidos,
-                pedidos.id_sala,
-                pedidos.num_mesa,
-                pedidos.id_usuario,
-                pedidos.fecha as fecha_pedidos,
-                pedidos.estado as estado_pedidos,
-                detalle_pedidos.nombre as nombre_detalle_pedidos,
-                detalle_pedidos.precio,
-                detalle_pedidos.cantidad
-            from
-                detalle_pedidos
-            join pedidos on
-                pedidos.id = detalle_pedidos.id_pedido) as tmp on
-            tmp.id_pedidos = pedidos.id 
-        where pedidos.id ='.$_GET["id_pedido"]); 
-}else{
-    echo "Error al pasar id del pedido";
-    $query = mysqli_query($conexion,'select * from usuarios'); 
-}
-
-
-$html1 = '<!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -151,7 +100,7 @@ $html1 = '<!DOCTYPE html>
         color: white;
         border: 1px solid;
         font-size: 13px;
-        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
 
     .table > thead{
@@ -171,7 +120,7 @@ $html1 = '<!DOCTYPE html>
 
     .monto-total > .table2 > thead {
         display: none;
-        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
 
     .literar-total{
@@ -183,7 +132,7 @@ $html1 = '<!DOCTYPE html>
         left: 0;
         bottom: 0;
         width: 100%;
-        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         text-align: center;
     }
 </style>
@@ -445,12 +394,23 @@ $html1 = '<!DOCTYPE html>
                     <tr>
                         <th scope="col" width="10%">Cantidad</th>
                         <th scope="col" width="50%">Concepto</th>
-                        <th scope="col" width="20%">P/U Bs.</th>
-                        <th scope="col" width="20%">SubTotal Bs.</th>
+                        <th scope="col" width="20%">P/U</th>
+                        <th scope="col" width="20%">SubTotal</th>
                     </tr>
                 </thead>
-                <tbody>';
-            $html3='
+                <tbody>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Caffe expres</td>
+                        <td>10</td>
+                        <td>30</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Rollo de queso</td>
+                        <td>15</td>
+                        <td>30</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -468,9 +428,9 @@ $html1 = '<!DOCTYPE html>
                     <tr>
                         <th class="ocultar" scope="row" width="43%"></th>
                         <td class="ocultar"></td>
-                        <td>Total Bs.</td>';
-                        
-             $html5='</tr>
+                        <td>Total Bs.</td>
+                        <td>525</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -478,8 +438,7 @@ $html1 = '<!DOCTYPE html>
             <table class="table">
                 <tbody>
                     <tr>
-                        <th scope="row">Son: '; 
-                $html7='</th>
+                        <th scope="row">Son:</th>
                     </tr>
                 </tbody>
             </table>
@@ -489,43 +448,8 @@ $html1 = '<!DOCTYPE html>
     <div class="footer">
         <span>"Esta factura contribuye al desarrollo del pais. el uso ilicito de esta sera sancionado deacuerdo a ley".</span> <br>
         <span>Ley Nº 453 </span>
+
     </div>
 
 </body>
-</html>';
-
-$html2='';
-$html4='';
-$html6='';
-$total_pedidos=0;
-while ($fila = mysqli_fetch_assoc($query) ) {
-    $html2.='<tr>
-                <th scope="row">'.$fila["cantidad"].'</th>
-                <td>'.$fila["nombre_detalle_pedidos"].'</td>
-                <td>'.number_format(floatval($fila["precio"]),2).'</td>
-                <td>'.number_format(floatval($fila["cantidad"])*floatval($fila["precio"]),2).'</td>
-            </tr>';
-    $html4='<td>'.$fila["total_pedidos"].'</td>';
-    $total_pedidos = number_format(floatval($fila["total_pedidos"]+0.33),2);
-}
-
-$formatter = new NumeroALetras();
-$html6=$formatter->toMoney($total_pedidos, 2, 'Bolivianos', 'CENTAVOS');
-
-//$html= file_get_contents('facturaModelo.php');
-
-// crear una instancia y usar la clase dompdf 
-$dompdf = new  Dompdf ();
-
-$dompdf-> loadHtml ( $html1.$html2.$html3.$html4.$html5.$html6.$html7 );
-
-// (Opcional) Configurar el tamaño y la orientación del papel 
-//$dompdf-> setPaper ( 'A4' , 'landscape' );
-
-// Representa el HTML como PDF 
-$dompdf -> render ();
-
-// Envía el PDF generado al navegador 
-$dompdf -> stream ();
-
-?>
+</html>
