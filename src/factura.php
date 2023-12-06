@@ -485,8 +485,9 @@ $html1 = '<!DOCTYPE html>
             </table>
         </div>
     </div>
-
+    
     <div class="footer">
+        <hr>
         <span>"Esta factura contribuye al desarrollo del pais. el uso ilicito de esta sera sancionado deacuerdo a ley".</span> <br>
         <span>Ley Nº 453 </span>
     </div>
