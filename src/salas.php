@@ -105,7 +105,7 @@ include_once "includes/header.php";
                     <table class="table table-striped table-bordered" id="tbl">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>Nro</th>
                                 <th>Nombre</th>
                                 <th>Mesas</th>
                                 <th></th>
@@ -117,10 +117,11 @@ include_once "includes/header.php";
 
                             $query = mysqli_query($conexion, "SELECT * FROM salas WHERE estado = 1");
                             $result = mysqli_num_rows($query);
+                            $contador = 1;
                             if ($result > 0) {
                                 while ($data = mysqli_fetch_assoc($query)) { ?>
                                     <tr>
-                                        <td><?php echo $data['id']; ?></td>
+                                        <td><?php echo $contador; $contador++; ?></td>
                                         <td><?php echo $data['nombre']; ?></td>
                                         <td><?php echo $data['mesas']; ?></td>
                                         <td>

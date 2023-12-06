@@ -66,7 +66,7 @@ $(function () {
                                                 value += 'k'
                                             }
                 
-                                            return '$' + value
+                                            return  value + ' Bs'
                                         }
                                     }, ticksStyle)
                                 }],

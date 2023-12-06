@@ -137,7 +137,7 @@ if (empty($_SESSION['active'])) {
 
                         </li>
 
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                             <i class="fas fa-toilet-paper"></i>
                                 <p>
@@ -156,7 +156,7 @@ if (empty($_SESSION['active'])) {
                                 } ?>
                             </ul>
 
-                        </li>
+                        </li> -->
 
                         <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
                             echo '<li class="nav-item">

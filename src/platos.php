@@ -126,7 +126,7 @@ if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
                             <table class="table table-striped table-bordered" id="tbl">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
+                                        <th>Nro</th>
                                         <th>Producto</th>
                                         <th>Precio</th>
                                         <th>Imagen</th>
@@ -138,10 +138,12 @@ if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
                                     include "../conexion.php";
                                     $query = mysqli_query($conexion, "SELECT * FROM platos WHERE estado = 1");
                                     $result = mysqli_num_rows($query);
+                                    $contador=$query->num_rows;
+                                    $aux=1;
                                     if ($result > 0) {
                                         while ($data = mysqli_fetch_assoc($query)) { ?>
                                             <tr>
-                                                <td><?php echo $data['id']; ?></td>
+                                                <td><?php echo $aux; $aux++; ?></td>
                                                 <td><?php echo $data['nombre']; ?></td>
                                                 <td><?php echo $data['precio']; ?></td>
                                                 <td><img class="img-thumbnail" src="<?php echo ($data['imagen'] == null) ? '../assets/img/default.png' : $data['imagen']; ?>" alt="" width="100"></td>

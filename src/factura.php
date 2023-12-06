@@ -124,7 +124,6 @@ $html1 = '<!DOCTYPE html>
 
     .datos-cliente>div>div {
         display: inline-block;
-        text-decoration: underline;
     }
 
     .datos-cliente>div>.dia {
@@ -174,8 +173,24 @@ $html1 = '<!DOCTYPE html>
         font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     }
 
-    .literar-total{
+    .literar-total>.table>tbody>tr>th{
         text-align: left;
+    }
+
+    .sr-nit{
+        width: 50%;
+        border-bottom: solid 1px;
+        margin-left: 5px;
+    }
+
+    .sr-razonsocial{
+        width: 70%;
+        border-bottom: solid 1px;
+        margin-left: 5px;
+    }
+
+    .lema2{
+        font-size:8px;
     }
 
     .footer {
@@ -184,6 +199,7 @@ $html1 = '<!DOCTYPE html>
         bottom: 0;
         width: 100%;
         font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        font-size:11px;
         text-align: center;
     }
 </style>
@@ -431,11 +447,11 @@ $html1 = '<!DOCTYPE html>
         <div class="datos-cliente">
             <div>
                 <b>La Paz,</b>
-                <div class="dia">05</div>/ <div class="mes">12</div>/ <div class="anio">2023</div> <span>NIT:</span>
-                <div>8362926010</div>
+                <div class="dia">'.date("d").'</div>/ <div class="mes">'.date('m').'</div>/ <div class="anio">'.date("Y").'</div> <span>NIT:</span>
+                <div class="sr-nit">'.$_GET["nit"].'</div>
             </div>
             <div>
-                Señores: <div>Cooperativa de Ahorro y Credito Solucredit San Silvestre LTDA</div>
+                Señor(es): <div class="sr-razonsocial">'.$_GET["nombre_razonsocial"].'</div>
             </div>
         </div>
 
@@ -488,8 +504,8 @@ $html1 = '<!DOCTYPE html>
     
     <div class="footer">
         <hr>
-        <span>"Esta factura contribuye al desarrollo del pais. el uso ilicito de esta sera sancionado deacuerdo a ley".</span> <br>
-        <span>Ley Nº 453 </span>
+        <span>"ESTA FACTURA CONTRIBUYE AL DESARROLLO DEL PAÍS. EL USO ILÍCITO DE ÉSTA SERÁ SANCIONADO DE ACUERDO A LEY."</span> <br>
+        <span class="lema2">En cumplimiento de la Ley N° 453 de 4 de diciembre de 2013, General de los Derechos de las Usuarias y los Usuarios y de las Consumidoras y los Consumidores</span>
     </div>
 
 </body>
@@ -507,7 +523,7 @@ while ($fila = mysqli_fetch_assoc($query) ) {
                 <td>'.number_format(floatval($fila["cantidad"])*floatval($fila["precio"]),2).'</td>
             </tr>';
     $html4='<td>'.$fila["total_pedidos"].'</td>';
-    $total_pedidos = number_format(floatval($fila["total_pedidos"]+0.33),2);
+    $total_pedidos = number_format(floatval($fila["total_pedidos"]),2);
 }
 
 $formatter = new NumeroALetras();

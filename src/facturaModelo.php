@@ -127,6 +127,11 @@
         text-align: left;
     }
 
+    .sr{
+        width: 50%;
+        border-bottom: solid 1px;
+    }
+
     .footer {
         position: fixed;
         left: 0;
