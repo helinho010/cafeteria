@@ -1,7 +1,7 @@
 <?php
     $host = "localhost";
     $user = "admin";
-    $clave = "hVwdeDP7jYaN";
+    $clave = "ttVoNDbbatM5";
     $bd = "cafeteria";
     $conexion = mysqli_connect($host,$user,$clave,$bd);
     if (mysqli_connect_errno()){
