@@ -31,6 +31,17 @@
 
 <script src="../assets/js/sweetalert2.all.min.js"></script>
 <script src="../assets/js/funciones.js"></script>
-</body>
 
+<script>
+    $("#nombre").bind('keypress', function(event) {
+        var regex = new RegExp("^[a-zA-Z ]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+</script>
+
+</body>
 </html>
